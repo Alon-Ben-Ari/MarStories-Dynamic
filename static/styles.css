@@ -2,8 +2,9 @@ body {
     margin-left: 1rem;
     margin-right: 1rem;
     background-image: url(images/index-background.jpg);
-    background-color: rgba(69, 0, 0, 1);
-    background-size: cover;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 1);
     font-family:  'Sansita', georgia, Helvetica, serif;
     color: white;
 }
