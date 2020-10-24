@@ -3,29 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous" type="text/css">
-    <!--link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" type="text/css"-->
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+     integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" 
+     crossorigin="anonymous" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" type="text/css">
     <title>MarStories - search mars images</title>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="..static/images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="..static/images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="..static/images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="..static/images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="..static/images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="..static/images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="..static/images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="..static/images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="..static/images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="..static/images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="..static/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="..static/images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="..static/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="static/images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="static/images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    
 </head>
 <body>
     <h1>MarStories</h1>
     <h4>Search images of NASA's Curiosity, Opportunity, and Spirit rovers on Mars.</h4>
     <p>Select the rover name and query by earth date or by Sol (Maritian day).</p>
     <div id="search">
-        <form class="row">
+        <form action="\" method="GET" class="row">
             <div class="col-auto">
-                <select class="form-select" aria-label="Default select example">
+                <label for="rover" class="visually-hidden">Select a rover:</label>
+                <select name="rover" class="form-select" tabindex="0" autofocus>
                     <option selected>Open this select menu</option>
                     <option value="Curiosity">Curiosity</option>
                     <option value="Spirit">Spirit</option>
                     <option value="Opportunity">Opportunity</option>
                 </select>            
             </div>
-            <!-- <div class="col-auto">
-                <label for="sol" class="visually-hidden">Earth date</label>
-                <input type="date" id="date" class="form-control" name="date" placeholder="Date" tabindex="0" autofocus> 
-            </div> -->
+            <div class="col-auto">
+                <label for="date" class="visually-hidden">Earth date:</label>
+                <input type="date" id="date" class="form-control" name="date" placeholder="Date"> 
+            </div>
             <div class="col-auto">
                 <label for="date" class="visually-hidden">Sol (Martian day):</label>
                 <input type="number" id="sol" class="form-control" name="sol" placeholder="Sol number">
@@ -37,20 +59,23 @@
     </div>
 
     <div class="results">
-        {set i = 0}
+        {% if args_given and not images_data %}
+            <p>No images for the selected date, please select another.</p>
+        {% else %}
         {% for img in images_data %}
-        {if i }
-        <a href="{{img['img_src']}}" target="_blank" class="card">
-            <img src="{{img['img_src']}}" class="card-img-top" alt="mars images by {{img['rover']['name']}}">
-            <div class="card-body">
-              <p class="card-title">Rover: {{img['rover']['name']}}</p>
-              <p class="card-text">Sol: {{img['sol']}}</p>
-              <p class="card-text">Earth date: {{img['earth_date']}}</p>
-              <p class="card-text">Camera: {{img['camera']['full_name']}}</p>
-            </div>
-          </a>
-          {set i = i + 1}
+                <a href="{{img['img_src']}}" target="_blank" class="card">
+                    <div class="result-img">
+                        <img src="{{img['img_src']}}" class="card-img-top" alt="mars images by {{img['rover']['name']}}">
+                    </div>
+                    <div class="card-body">
+                    <p class="card-title">Rover: {{img['rover']['name']}}</p>
+                    <p class="card-text">Sol: {{img['sol']}}</p>
+                    <p class="card-text">Earth date: {{img['earth_date']}}</p>
+                    <p class="card-text">Camera: {{img['camera']['full_name']}}</p>
+                    </div>
+                </a>
         {% endfor %}
+        {% endif %}
     </div>
     
 </body>
