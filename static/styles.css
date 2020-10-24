@@ -1,0 +1,65 @@
+body {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background-image: url(images/index-background.jpg);
+    background-color: rgba(69, 0, 0, 1);
+    background-size: cover;
+    font-family:  'Sansita', georgia, Helvetica, serif;
+    color: white;
+}
+
+h1 {
+    margin: 2rem 1rem 1rem 1rem;
+}
+
+h4, p {
+    
+    margin: 1rem;
+    color: rgb(255, 255, 255);
+}
+
+.btn {
+    color: rgba(10, 1, 1, 1);
+    background-color: rgba(200, 200, 200, 1);
+}
+
+.btn:hover {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(10, 1, 1, 1);
+}
+
+#search {
+    margin: 1.5em;
+} 
+
+.results {
+    margin: 1em;
+    width: 90%;
+    background-color: rgba(196, 196, 196, 0.7);
+    /*display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;*/
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: minmax(150px, auto);
+    gap: 5px;
+  }
+
+.results a {
+    text-decoration: none;
+}
+
+.results a:hover {
+    background-color:  rgba(196, 179, 179, 0.9);
+}
+
+.card-body {
+    margin: 0.5rem 0.5rem;
+    padding: 0.2rem 0.2rem;
+}
+
+.card-body p {
+    color: black;
+    margin: 0.2rem;
+}
+
